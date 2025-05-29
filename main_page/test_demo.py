@@ -43,6 +43,12 @@ def test_input_login_data(driver, fake_auth_data):
     username_field.send_keys(fake_auth_data["username"])
     password_field.send_keys(fake_auth_data["password"])
 
-def test_click_login_button(driver):
+def test_show_preload_login_button(driver):
     login_button = driver.find_element(By.XPATH, '//*[contains(@class, "DjSvCZoKKfoNSmarsEcTS")]')
     login_button.click()
+    login_button_preloader = driver.find_element(By.XPATH,'//*[contains(@class, "_1VLukpV8qjL4BULw7Zob_l WYrJyNEVnjgAnMVZgvPeg")]')
+    login_button_preloader.is_displayed()
+
+def test_show_auth_text_error(driver):
+    error_auth_text = driver.find_element(By.XPATH, '//*[contains(@class, "_1W_6HXiG4JJ0By1qN_0fGZ")]')
+    error_auth_text.is_displayed()
