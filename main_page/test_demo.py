@@ -54,3 +54,5 @@ def test_open_main_page(driver, username, password):
 
     WebDriverWait(driver, WAIT_TIMEOUT).until(
         EC.visibility_of_element_located(AUTH_ERROR_TEXT))
+
+    assert True  # if we are here - test passed
