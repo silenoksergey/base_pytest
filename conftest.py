@@ -4,7 +4,7 @@ from selenium import webdriver
 
 @pytest.fixture(scope="function")
 def driver():
-    browser = webdriver.Chrome()
-    browser.maximize_window()
-    yield browser
-    browser.quit()
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    yield driver
+    driver.quit()
