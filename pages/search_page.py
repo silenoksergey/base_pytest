@@ -2,19 +2,17 @@ import re
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from pages.base_page import BasePage
 
 
-class SearchPage:
-    SEARCH_PAGE_URL = "https://store.steampowered.com/search/"
+class SearchPage(BasePage):
+    PAGE_URL = "https://store.steampowered.com/search/"
     SORT_DROPDOWN = (By.ID, "sort_by_trigger")
     SORT_DROPDOWN_DESC = (By.ID, "Price_DESC")
     GAME_PRICES = (By.XPATH, "//*[contains(@class, 'discount_final_price')]")
     WAIT_TIMEOUT = 10
-
-    def __init__(self, driver):
-        self.driver = driver
-        self.price_pattern = (r'(\d{1,3}(?:[,.]\d{3})*(?:[,.]\d{1,2})?(?:\s*'
-                              r'(?:руб|[a-zA-Z]{1,5}|[$€£¥₽]))|\b(?:Бесплатно|Free|Gratis)\b)')
+    PRICE_PATTERN = (r'(\d{1,3}(?:[,.]\d{3})*(?:[,.]\d{1,2})?(?:\s*'
+                     r'(?:руб|[a-zA-Z]{1,5}|[$€£¥₽]))|\b(?:Бесплатно|Free|Gratis)\b)')
 
     def sort_by_price_desc(self):
         dropdown = (WebDriverWait(self.driver, self.WAIT_TIMEOUT).until(
@@ -43,7 +41,7 @@ class SearchPage:
         prices = self.get_games_prices(count)
         extracted_prices = []
         for price in prices:
-            found_prices = re.findall(self.price_pattern, price)
+            found_prices = re.findall(self.PRICE_PATTERN, price)
             extracted_prices.append(found_prices[-1] if found_prices else None)
 
         def convert_price_to_float(price):
