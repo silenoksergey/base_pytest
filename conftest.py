@@ -1,11 +1,10 @@
 import pytest
-from selenium import webdriver
+from driver_singleton import DriverSingleton
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def driver():
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    yield driver
+    driver = DriverSingleton()
+    yield driver.get_driver()
     driver.quit()
 
