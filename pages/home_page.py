@@ -14,9 +14,9 @@ class HomePage(BasePage):
     def search_game(self, game_name):
 
         search = WebDriverWait(self.driver, self.WAIT_TIMEOUT).until(
-            EC.presence_of_element_located(self.SEARCH_FIELD))
+            EC.visibility_of_element_located(self.SEARCH_FIELD))
         search.send_keys(game_name + Keys.RETURN)
-        return SearchPage(self.driver)
+
 
     def verify_language(self, language):
         """Проверяет, что язык применён, через текст выпадающего списка."""
