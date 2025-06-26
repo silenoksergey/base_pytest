@@ -1,28 +1,35 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from config_reader import ConfigReader
 
 
 class DriverSingleton:
     _instance = None
+    _driver = None
 
-
-    def __new__(cls, language="en-US"):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
+    @staticmethod
+    def get_driver(language="en-US"):
+        if DriverSingleton._instance is None:
+            from selenium import webdriver
+            from selenium.webdriver.chrome.options import Options
             chrome_options = Options()
+            config = ConfigReader()
+
+
+            if config.get_headless():
+                chrome_options.add_argument("--headless")
+
             chrome_options.add_experimental_option("prefs", {
                 "intl.accept_languages": language
             })
-            cls._instance.driver = webdriver.Chrome(options=chrome_options)
-            cls._instance.driver.maximize_window()
-        return cls._instance
+            DriverSingleton._driver = webdriver.Chrome(options=chrome_options)
+            if config.get_maximize():
+                DriverSingleton._driver.maximize_window()
 
+            DriverSingleton._instance = True
+        return DriverSingleton._driver
 
-
-    def get_driver(self):
-        return self.driver
-
-    def quit(self):
-        if self.driver:
-            self.driver.quit()
-            self.__class__._instance = None
+    @staticmethod
+    def quit():
+        if DriverSingleton._driver:
+            DriverSingleton._driver.quit()
+            DriverSingleton._instance = None
+            DriverSingleton._driver = None

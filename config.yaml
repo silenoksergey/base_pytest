@@ -1,0 +1,10 @@
+wait_timeout: 10
+home_page_url: "https://store.steampowered.com/"
+
+browser:
+  headless: False
+  maximize: True
+
+lang_map:
+  russian: "ru-RU"
+  english: "en-US"
