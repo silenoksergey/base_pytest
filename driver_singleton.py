@@ -13,7 +13,6 @@ class DriverSingleton:
             chrome_options = Options()
             config = ConfigReader()
 
-
             if config.get_headless():
                 chrome_options.add_argument("--headless")
 

@@ -5,6 +5,7 @@ from pages.search_page import SearchPage
 from utils.price_utils import PriceUtils
 from pages.navigation import Navigation
 
+
 @pytest.fixture(params=["russian", "english"])
 def language(request):
     return request.param

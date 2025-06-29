@@ -20,4 +20,3 @@ class PriceUtils:
 
     def parse_prices(self, prices):
         return [self.extract_price(price) for price in prices]
-
