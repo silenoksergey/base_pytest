@@ -14,7 +14,7 @@ class BasePage:
         self.wait_timeout = self.config.get_wait_timeout()
 
     def is_unique_element_visible(self):
-        return WebDriverWait(self.driver, self.wait_timeout).until(EC.presence_of_element_located(self.UNIQ_ELEMENT))
+        return WebDriverWait(self.driver, self.wait_timeout).until(EC.presence_of_element_located(self.UNIQUE_ELEMENT))
 
     def get_displayed_language(self):
         dropdown = WebDriverWait(self.driver, self.wait_timeout).until(

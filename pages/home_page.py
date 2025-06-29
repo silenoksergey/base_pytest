@@ -7,7 +7,7 @@ from pages.base_page import BasePage
 
 class HomePage(BasePage):
     SEARCH_FIELD = (By.ID, 'store_nav_search_term')
-    UNIQ_ELEMENT = (By.XPATH, '//*[contains(@class, "home_page_gutter_top")]')
+    UNIQUE_ELEMENT = (By.ID, 'home_video_desktop')
 
     def search_game(self, game_name):
         search = WebDriverWait(self.driver, self.wait_timeout).until(
