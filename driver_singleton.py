@@ -13,14 +13,12 @@ class DriverSingleton:
             chrome_options = Options()
             config = ConfigReader()
 
-            if config.get_headless():
+            if config["browser"]["headless"]:
                 chrome_options.add_argument("--headless")
 
-            chrome_options.add_experimental_option("prefs", {
-                "intl.accept_languages": language
-            })
+            chrome_options.add_argument(f"--lang={language}")
             DriverSingleton._driver = webdriver.Chrome(options=chrome_options)
-            if config.get_maximize():
+            if config["browser"]["maximize"]:
                 DriverSingleton._driver.maximize_window()
 
             DriverSingleton._instance = True

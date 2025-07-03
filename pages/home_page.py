@@ -10,6 +10,6 @@ class HomePage(BasePage):
     UNIQUE_ELEMENT = (By.ID, 'home_video_desktop')
 
     def search_game(self, game_name):
-        search = WebDriverWait(self.driver, self.wait_timeout).until(
+        search = WebDriverWait(self.driver, self.WAIT_TIMEOUT).until(
             EC.visibility_of_element_located(self.SEARCH_FIELD))
         search.send_keys(game_name + Keys.RETURN)

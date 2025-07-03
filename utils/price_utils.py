@@ -4,8 +4,8 @@ import re
 class PriceUtils:
     PRICE_PATTERN = (r'(\d{1,3}(?:[,.]\d{3})*(?:[,.]\d{1,2})?(?:\s*'
                      r'(?:руб|[a-zA-Z]{1,5}|[$€£¥₽]))|\b(?:Бесплатно|Free|Gratis)\b)')
-
-    def extract_price(self, text):
+    @staticmethod
+    def extract_price(text):
         matches = re.findall(r'[\d\s]+[.,]?\d*', text.replace('\n', ' '))
         matches = [m for m in matches if m.strip()]
         if matches:
@@ -18,5 +18,6 @@ class PriceUtils:
             return 0.0
         return 0.0
 
-    def parse_prices(self, prices):
-        return [self.extract_price(price) for price in prices]
+    @staticmethod
+    def parse_prices(prices):
+        return [PriceUtils.extract_price(price) for price in prices]
