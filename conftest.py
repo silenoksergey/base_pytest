@@ -23,6 +23,7 @@ def driver(language):
     yield DriverSingleton.get_driver()
     DriverSingleton.quit()
 
+
 @pytest.fixture(scope="function")
 def open_home_page(driver):
     config = ConfigReader()

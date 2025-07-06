@@ -2,11 +2,13 @@ import re
 
 
 class PriceUtils:
-    PRICE_PATTERN = (r'(\d{1,3}(?:[,.]\d{3})*(?:[,.]\d{1,2})?(?:\s*'
-                     r'(?:руб|[a-zA-Z]{1,5}|[$€£¥₽]))|\b(?:Бесплатно|Free|Gratis)\b)')
+    compiled_pattern = re.compile(r'(\d{1,3}(?:[,.]\d{3})*(?:[,.]\d{1,2})?(?:\s*'
+                                  r'(?:руб|[a-zA-Z]{1,5}|[$€£¥₽]))|\b(?:Бесплатно|Free|Gratis)\b)')
+
     @staticmethod
     def extract_price(text):
-        matches = re.findall(r'[\d\s]+[.,]?\d*', text.replace('\n', ' '))
+        matches = PriceUtils.compiled_pattern.findall(text.replace('\n', ' '))
+
         matches = [m for m in matches if m.strip()]
         if matches:
             num_str = matches[-1].replace(' ', '').replace(',', '.')

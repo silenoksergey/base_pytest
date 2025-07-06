@@ -1,9 +1,7 @@
 import pytest
-from config_reader import ConfigReader
 from pages.home_page import HomePage
 from pages.search_page import SearchPage
 from utils.price_utils import PriceUtils
-
 
 
 @pytest.mark.parametrize("game_name, count", [

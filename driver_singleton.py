@@ -2,12 +2,11 @@ from config_reader import ConfigReader
 
 
 class DriverSingleton:
-    _instance = None
     _driver = None
 
     @staticmethod
     def get_driver(language="en-US"):
-        if DriverSingleton._instance is None:
+        if DriverSingleton._driver is None:
             from selenium import webdriver
             from selenium.webdriver.chrome.options import Options
             chrome_options = Options()
@@ -21,12 +20,10 @@ class DriverSingleton:
             if config["browser"]["maximize"]:
                 DriverSingleton._driver.maximize_window()
 
-            DriverSingleton._instance = True
         return DriverSingleton._driver
 
     @staticmethod
     def quit():
         if DriverSingleton._driver:
             DriverSingleton._driver.quit()
-            DriverSingleton._instance = None
             DriverSingleton._driver = None
