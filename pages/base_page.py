@@ -1,13 +1,13 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from config_reader import ConfigReader
+from driver_singleton import DriverSingleton
 
 
 class BasePage:
     WAIT_TIMEOUT = ConfigReader().config["wait_timeout"]
 
     def __init__(self):
-        from driver_singleton import DriverSingleton
         self.driver = DriverSingleton.get_driver()
 
     def wait_for_open(self):

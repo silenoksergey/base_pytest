@@ -2,8 +2,8 @@ wait_timeout: 10
 home_page_url: "https://store.steampowered.com/"
 
 browser:
-  headless: False
-  maximize: True
+  - "--headless"
+  - "--window-size=1920,1080"
 
 lang_map:
   russian: "ru-RU"

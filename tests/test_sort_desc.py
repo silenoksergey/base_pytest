@@ -12,7 +12,6 @@ class TestSortDesc:
     def test_search_page(self, driver, open_home_page, game_name, count, language):
         home_page = HomePage()
         search_page = SearchPage()
-        home_page.wait_for_open()
         home_page.search_game(game_name)
         search_page.sort_by_price_desc()
         search_page.wait_for_open()

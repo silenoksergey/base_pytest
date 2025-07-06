@@ -1,24 +1,22 @@
 from config_reader import ConfigReader
+from enum_language import Language
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 
 class DriverSingleton:
     _driver = None
 
     @staticmethod
-    def get_driver(language="en-US"):
+    def get_driver(language=Language.DEFAULT_LANGUAGE):
         if DriverSingleton._driver is None:
-            from selenium import webdriver
-            from selenium.webdriver.chrome.options import Options
             chrome_options = Options()
             config = ConfigReader()
-
-            if config["browser"]["headless"]:
-                chrome_options.add_argument("--headless")
-
+            option_list = config.config["browser"]
+            for opt in option_list:
+                chrome_options.add_argument(opt)
             chrome_options.add_argument(f"--lang={language}")
             DriverSingleton._driver = webdriver.Chrome(options=chrome_options)
-            if config["browser"]["maximize"]:
-                DriverSingleton._driver.maximize_window()
 
         return DriverSingleton._driver
 
