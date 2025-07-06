@@ -12,9 +12,7 @@ def language(request):
 
 @pytest.fixture(scope="function")
 def driver(language):
-    config = ConfigReader()
-    lang_map = config.config["lang_map"]
-    DriverSingleton.get_driver(language=lang_map[language])
+    DriverSingleton.get_driver(language=language)
     yield DriverSingleton.get_driver()
     DriverSingleton.quit()
 
